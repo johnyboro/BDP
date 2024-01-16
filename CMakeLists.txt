@@ -13,9 +13,31 @@ find_package(Curses REQUIRED)
 
 set(SOURCE_FILES
         main.cpp
+        game/source/gameClock.cpp
+        game/source/game.cpp
+        game/source/gameScreen.cpp
+        game/source/mainMenu.cpp
+        game/source/overScreen.cpp
         game/source/player.cpp
+        game/source/screenTemplate.cpp
+        game/source/teamScreen.cpp
+        game/source/terminalSize.cpp
+        game/source/button.cpp
+)
+
+set(HEADERS
+        game/content/gameClock.h
+        game/content/game.h
+        game/content/gameScreen.h
+        game/content/mainMenu.h
+        game/content/overScreen.h
+        game/content/player.h
+        game/content/screenTemplate.h
+        game/content/teamScreen.h
+        game/content/terminalSize.h
+        game/content/button.h
 )
 
 # Add executable and link against ENet and ncurses
-add_executable(BDP ${SOURCE_FILES})
+add_executable(BDP ${SOURCE_FILES} ${HEADERS})
 target_link_libraries(BDP PRIVATE enet ncurses)
