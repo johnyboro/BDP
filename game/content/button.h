@@ -6,21 +6,15 @@
 
 class button {
 public:
-    button(const std::string& label, int y, int x);
-    ~button();
+    button(int x, int y, int width, int height, const char* label);
 
-    void display(bool selected) const;
-    bool handleInput(int input);
-    bool isSelected() const;
+    void draw();
+    void onSelect();
 
 private:
-    std::string label;
-    int y, x;
-    static const int width = 20;  // Adjust as needed
-    WINDOW *win;
-
-    void initWindow();
-    void destroyWindow();
+    int x, y, width, height;
+    const char* label;
+    WINDOW* window;
 };
 
 #endif // BUTTON_H

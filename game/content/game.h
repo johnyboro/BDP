@@ -11,12 +11,13 @@ public:
     void init();
     void mainMenu();
     void connect();
+    void teamScreen();
     void gameLoop();
     void quit();
 
 private:
     int port;
-    gameClock gameClock;
+    gameClock gClock;
 };
 
 #endif //BDP_GAME_H

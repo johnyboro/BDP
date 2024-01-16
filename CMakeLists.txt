@@ -19,7 +19,6 @@ set(SOURCE_FILES
         game/source/mainMenu.cpp
         game/source/overScreen.cpp
         game/source/player.cpp
-        game/source/screenTemplate.cpp
         game/source/teamScreen.cpp
         game/source/terminalSize.cpp
         game/source/button.cpp
@@ -32,7 +31,6 @@ set(HEADERS
         game/content/mainMenu.h
         game/content/overScreen.h
         game/content/player.h
-        game/content/screenTemplate.h
         game/content/teamScreen.h
         game/content/terminalSize.h
         game/content/button.h
