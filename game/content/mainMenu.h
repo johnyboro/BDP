@@ -1,14 +1,21 @@
-//
-// Created by johnyboro on 1/11/24.
-//
+#ifndef MAINMENU_H
+#define MAINMENU_H
 
-#ifndef BDP_MAINMENU_H
-#define BDP_MAINMENU_H
-
+#include "button.h"
 
 class mainMenu {
+public:
+    mainMenu(int screenWidth, int screenHeight);
 
+    void draw();
+    void handleInput(int input);
+
+    button startButton;
+    button exitButton;
+
+private:
+    int screenWidth, screenHeight;
+    WINDOW* titleWindow;
 };
 
-
-#endif //BDP_MAINMENU_H
+#endif // MAINMENU_H

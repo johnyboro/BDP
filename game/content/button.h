@@ -9,7 +9,9 @@ public:
     button(int x, int y, int width, int height, const char* label);
 
     void draw();
-    void onSelect();
+//    void onSelect(); deprecated
+
+    bool isSelected;
 
 private:
     int x, y, width, height;

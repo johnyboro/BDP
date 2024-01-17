@@ -2,8 +2,9 @@
 #include <clocale>
 #include "../content/game.h"
 #include "../content/mainMenu.h"
+#include "../content/terminalSize.h"
 
-game::game(int tick, int port) : gClock(tick), port(port) {}
+game::game(int tick, int port, int terminalWidth, int terminalHeight) : gClock(tick), port(port), terminalWidth(terminalWidth), terminalHeight(terminalHeight) {}
 
 game::~game() {
     quit();
@@ -17,17 +18,30 @@ void game::init() {
     noecho();             // Do not display input characters
     curs_set(0);          // Hide the cursor
     start_color();        // Enable color
+
+    refresh(); // TO MUSI TU BYĆ BO NCURSES JEST BROKEN I TYLKO BÓG WIE CZEMU :(
 }
 
-void game::mainMenu() {
-//    mainMenu mainMenu;
+void game::waitForTerminal() {
+    terminalSize screen(terminalHeight, terminalWidth);
+    screen.waitForTerminalSize(); // Wait for user to resize the terminal
+}
+
+void game::startMainMenu() {
+    mainMenu mainMenu(terminalWidth, terminalHeight);
+    int input;
+    do {
+        mainMenu.draw();
+        input = getch();
+        mainMenu.handleInput(input);
+    } while (input != 27);
 }
 
 void game::connect() {
     // networking
 }
 
-void game::teamScreen() {
+void game::startTeamScreen() {
     // team screen
 }
 

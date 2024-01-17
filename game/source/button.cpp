@@ -6,21 +6,30 @@ button::button(int x, int y, int width, int height, const char* label)
     init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Default state
     init_pair(2, COLOR_RED, COLOR_BLACK);    // Selected state
 
+    isSelected = false;
     window = newwin(height, width, y, x);
 }
 
 void button::draw(){
-    wattron(window, COLOR_PAIR(1));
+    int color_selection;
+    if(isSelected)
+        color_selection = 2;
+    else
+        color_selection = 1;
+    wattron(window, COLOR_PAIR(color_selection));
     box(window, 0, 0);
     mvwprintw(window, 1, 1, label);
-    wattroff(window, COLOR_PAIR(1));
+    wattroff(window, COLOR_PAIR(color_selection));
     wrefresh(window);
 }
 
-void button::onSelect() {
-    wattron(window, COLOR_PAIR(2));
-    box(window, 0, 0);
-    mvwprintw(window, 1, 1, label);
-    wattroff(window, COLOR_PAIR(2));
-    wrefresh(window);
-}
+//void button::onSelect() {
+//    isSelected = true;
+//    wattron(window, COLOR_PAIR(2));
+//    box(window, 0, 0);
+//    mvwprintw(window, 1, 1, label);
+//    wattroff(window, COLOR_PAIR(2));
+//    wrefresh(window);
+//}
+
+//DEPRECATED FUNCTION

@@ -3,7 +3,8 @@
 #include <ncurses.h>
 
 int main() {
-    game game(30, 1234);
+    game game(30, 1234, 200, 50);
     game.init();
-
+    game.waitForTerminal();
+    game.startMainMenu();
 }

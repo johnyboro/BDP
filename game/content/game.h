@@ -5,19 +5,23 @@
 
 class game {
 public:
-    game(int tick, int port);
+    game(int tick, int port, int terminalWidth, int terminalHeight);
     ~game();
 
     void init();
-    void mainMenu();
+    void waitForTerminal();
+    void startMainMenu();
     void connect();
-    void teamScreen();
+    void startTeamScreen();
     void gameLoop();
     void quit();
 
 private:
     int port;
     gameClock gClock;
+
+    int terminalWidth;
+    int terminalHeight;
 };
 
 #endif //BDP_GAME_H

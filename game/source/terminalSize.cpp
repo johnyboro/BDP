@@ -1,14 +1,13 @@
 #include "../content/terminalSize.h"
+#include "../content/button.h"
 #include <ncurses.h>
 
 terminalSize::terminalSize(int desiredRows, int desiredCols) : desiredRows(desiredRows), desiredCols(desiredCols) {
     initscr(); // Initialize ncurses
-    timeout(0); // Non-blocking getch
+//    timeout(0); // Non-blocking getch
 }
 
-terminalSize::~terminalSize() {
-    endwin(); // Close ncurses
-}
+terminalSize::~terminalSize() = default;
 
 bool terminalSize::isTerminalSizeAchieved() {
     getmaxyx(stdscr, currentRows, currentCols); // Get current terminal size
@@ -16,11 +15,12 @@ bool terminalSize::isTerminalSizeAchieved() {
 }
 
 void terminalSize::waitForTerminalSize() {
+    getmaxyx(stdscr, currentRows, currentCols);
+    button sign(currentCols/2 - 25, currentRows/2 - 1, 50, 3, "Please make your little terminal bigger <3");
     while (!isTerminalSizeAchieved()) {
-        clear();
-        printw("Please resize your terminal to at least %dx%d.", desiredCols, desiredRows);
+        sign.draw();
         refresh();
-        getch(); // Non-blocking wait for a key press
+//        getch(); // Non-blocking wait for a key press
     }
     clear();
 }
