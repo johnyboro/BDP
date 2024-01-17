@@ -19,7 +19,7 @@ void game::init() {
     curs_set(0);          // Hide the cursor
     start_color();        // Enable color
 
-    refresh(); // TO MUSI TU BYĆ BO NCURSES JEST BROKEN I TYLKO BÓG WIE CZEMU :(
+    refresh(); // NCURSES JEST BROKEN I TYLKO BÓG WIE CZEMU
 }
 
 void game::waitForTerminal() {
@@ -34,20 +34,30 @@ void game::startMainMenu() {
         mainMenu.draw();
         input = getch();
         mainMenu.handleInput(input);
-    } while (input != 27);
+    } while (input != 32);
+    if(mainMenu.exitButton.isSelected){
+        quit();
+    }
+    else if(mainMenu.startButton.isSelected) {
+        connect();
+    }
 }
 
 void game::connect() {
     // networking
+    // blah blah blah
+    startTeamScreen();
 }
 
 void game::startTeamScreen() {
     // team screen
+    // bleh bleh
+    gameLoop();
 }
 
 void game::gameLoop() {
     gClock.startClock();
-    // game
+
 }
 
 void game::quit() {

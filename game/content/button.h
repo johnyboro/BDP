@@ -15,7 +15,7 @@ public:
 
 private:
     int x, y, width, height;
-    const char* label;
+    std::string label;
     WINDOW* window;
 };
 

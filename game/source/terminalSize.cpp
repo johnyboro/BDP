@@ -16,7 +16,7 @@ bool terminalSize::isTerminalSizeAchieved() {
 
 void terminalSize::waitForTerminalSize() {
     getmaxyx(stdscr, currentRows, currentCols);
-    button sign(currentCols/2 - 25, currentRows/2 - 1, 50, 3, "Please make your little terminal bigger <3");
+    button sign(currentCols/2 - 25, currentRows/2 - 1, 80, 5, "Please make your tiny ahh terminal a lil bigger <3");
     while (!isTerminalSizeAchieved()) {
         sign.draw();
         refresh();

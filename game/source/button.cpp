@@ -18,7 +18,7 @@ void button::draw(){
         color_selection = 1;
     wattron(window, COLOR_PAIR(color_selection));
     box(window, 0, 0);
-    mvwprintw(window, 1, 1, label);
+    mvwprintw(window, height/2, width/2 - label.length()/2, label.c_str());
     wattroff(window, COLOR_PAIR(color_selection));
     wrefresh(window);
 }

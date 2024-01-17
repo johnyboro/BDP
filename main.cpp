@@ -7,4 +7,6 @@ int main() {
     game.init();
     game.waitForTerminal();
     game.startMainMenu();
+
+    return 0;
 }

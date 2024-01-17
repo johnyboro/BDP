@@ -22,6 +22,7 @@ set(SOURCE_FILES
         game/source/teamScreen.cpp
         game/source/terminalSize.cpp
         game/source/button.cpp
+        game/source/physics.cpp
 )
 
 set(HEADERS
@@ -34,6 +35,7 @@ set(HEADERS
         game/content/teamScreen.h
         game/content/terminalSize.h
         game/content/button.h
+        game/content/physics.h
 )
 
 # Add executable and link against ENet and ncurses
