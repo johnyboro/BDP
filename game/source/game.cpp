@@ -3,6 +3,7 @@
 #include "../content/game.h"
 #include "../content/mainMenu.h"
 #include "../content/terminalSize.h"
+#include "../content/gameField.h"
 
 game::game(int tick, int port, int terminalWidth, int terminalHeight) : gClock(tick), port(port), terminalWidth(terminalWidth), terminalHeight(terminalHeight) {}
 
@@ -19,7 +20,7 @@ void game::init() {
     curs_set(0);          // Hide the cursor
     start_color();        // Enable color
 
-    refresh(); // NCURSES JEST BROKEN I TYLKO BÓG WIE CZEMU
+    refresh(); // bo tak
 }
 
 void game::waitForTerminal() {
@@ -36,27 +37,47 @@ void game::startMainMenu() {
         mainMenu.handleInput(input);
     } while (input != 32);
     if(mainMenu.exitButton.isSelected){
-        quit();
+        // nothing (you can't escape the matrix)
     }
     else if(mainMenu.startButton.isSelected) {
-        connect();
+        clear();
     }
 }
 
 void game::connect() {
     // networking
     // blah blah blah
-    startTeamScreen();
 }
 
 void game::startTeamScreen() {
     // team screen
-    // bleh bleh
-    gameLoop();
+    // bleh blah
 }
 
 void game::gameLoop() {
     gClock.startClock();
+    oManager.addPlayer(35, 35);
+    oManager.initPlayers();
+    gameField gField(400, 80);
+    nodelay(stdscr, TRUE);     // Enable non-blocking mode for getch
+    int input;
+    int i = 1;
+    do {
+        if(gClock.shouldUpdate()) {
+            input = getch();
+            flushinp(); // function to flush input buffer (very important)
+            if (input != ERR) {
+                oManager.inputPlayers(input);
+            }
+            oManager.updatePlayers();
+            clear();
+            oManager.drawPlayers();
+            mvprintw(1, 1, "tick count: %d", i);
+            mvprintw(3, 1, "input: %d", input);
+            refresh();
+            i++;
+        }
+    } while (input != 'q');
 
 }
 

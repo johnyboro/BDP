@@ -2,6 +2,7 @@
 #define BDP_GAME_H
 
 #include "gameClock.h"
+#include "objectManager.h"
 
 class game {
 public:
@@ -19,6 +20,7 @@ public:
 private:
     int port;
     gameClock gClock;
+    objectManager oManager;
 
     int terminalWidth;
     int terminalHeight;

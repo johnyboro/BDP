@@ -3,13 +3,16 @@
 
 class physics {
 public:
-    physics(double gravity = 0.0);
+    physics(int gravity, int drag, int bounciness);
 
-    // Update object position based on velocity and gravity
-    void updatePosition(int& x, int& y, int& velocityX, int& velocityY);
+    void applyVelocity(int& position, int velocity);
+    void applyGravity(int& velocity);
+    void applyDrag(int& velocity);
 
 private:
-    double gravity_; // Gravity acceleration
+    int gravity_;
+    int drag_;
+    int bounciness_;
 };
 
 #endif //BDP_PHYSICS_H

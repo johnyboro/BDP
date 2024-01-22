@@ -23,6 +23,9 @@ set(SOURCE_FILES
         game/source/terminalSize.cpp
         game/source/button.cpp
         game/source/physics.cpp
+        game/source/bCircle.cpp
+        game/source/objectManager.cpp
+        game/source/gameField.cpp
 )
 
 set(HEADERS
@@ -36,6 +39,9 @@ set(HEADERS
         game/content/terminalSize.h
         game/content/button.h
         game/content/physics.h
+        game/content/bCircle.h
+        game/content/objectManager.h
+        game/content/gameField.h
 )
 
 # Add executable and link against ENet and ncurses
