@@ -17,6 +17,7 @@ void player::setX(int x) { x_ = x; }
 void player::setY(int y) { y_ = y; }
 void player::setVelocityX(int velocityX) { velocityX_ = velocityX; }
 void player::setVelocityY(int velocityY) { velocityY_ = velocityY; }
+void player::setId(int id) { id_ = id; }
 
 void player::initCircle() {
     init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Team 1

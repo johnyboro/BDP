@@ -1,14 +1,15 @@
 #include "game/content/game.h"
-#include "game/content/button.h"
-#include <ncurses.h>
 
 int main() {
-    game game(30, 1234, 200, 50);
+    game game(15, "localhost", 200, 50);
     game.init();
     game.waitForTerminal();
-//    game.startMainMenu();
+    game.startMainMenu();
+    if(game.doQuit)
+        return 0;
+    game.startTeamScreen();
+    game.connect();
     game.gameLoop();
 
-    game.quit();
     return 0;
 }

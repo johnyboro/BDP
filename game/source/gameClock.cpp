@@ -28,7 +28,7 @@ bool gameClock::shouldUpdate() {
     auto duration = std::chrono::duration_cast<std::chrono::duration<double>>(now - lastUpdate);
 
     if (duration.count() >= 1.0 / tick) {
-        lastUpdate += std::chrono::duration_cast<std::chrono::steady_clock::duration>(std::chrono::duration<double>(1.0 / tick));
+        lastUpdate = now;  // Update lastUpdate to the current time
         return true;
     }
 

@@ -26,6 +26,7 @@ set(SOURCE_FILES
         game/source/bCircle.cpp
         game/source/objectManager.cpp
         game/source/gameField.cpp
+        networking/source/client.cpp
 )
 
 set(HEADERS
@@ -42,6 +43,8 @@ set(HEADERS
         game/content/bCircle.h
         game/content/objectManager.h
         game/content/gameField.h
+        networking/content/playerUpdate.h
+        networking/content/client.h
 )
 
 # Add executable and link against ENet and ncurses

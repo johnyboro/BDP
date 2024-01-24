@@ -3,8 +3,8 @@
 button::button(int x, int y, int width, int height, const char* label)
         : x(x), y(y), width(width), height(height), label(label) {
     // Initialize colors for the button
-    init_pair(1, COLOR_GREEN, COLOR_BLACK);  // Default state
-    init_pair(2, COLOR_RED, COLOR_BLACK);    // Selected state
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);  // Default state
+    init_pair(2, COLOR_YELLOW, COLOR_BLACK);    // Selected state
 
     isSelected = false;
     window = newwin(height, width, y, x);

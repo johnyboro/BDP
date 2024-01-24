@@ -3,9 +3,10 @@
 #include "../content/game.h"
 #include "../content/mainMenu.h"
 #include "../content/terminalSize.h"
-#include "../content/gameField.h"
+#include "../content/teamScreen.h"
 
-game::game(int tick, int port, int terminalWidth, int terminalHeight) : gClock(tick), port(port), terminalWidth(terminalWidth), terminalHeight(terminalHeight) {}
+game::game(int tick, const char* port, int terminalWidth, int terminalHeight)
+            : gClock(tick), port(port), terminalWidth(terminalWidth), terminalHeight(terminalHeight), doQuit(false) {}
 
 game::~game() {
     quit();
@@ -20,7 +21,7 @@ void game::init() {
     curs_set(0);          // Hide the cursor
     start_color();        // Enable color
 
-    refresh(); // bo tak
+    refresh(); // yes
 }
 
 void game::waitForTerminal() {
@@ -33,32 +34,46 @@ void game::startMainMenu() {
     int input;
     do {
         mainMenu.draw();
+        refresh();
         input = getch();
         mainMenu.handleInput(input);
-    } while (input != 32);
-    if(mainMenu.exitButton.isSelected){
-        // nothing (you can't escape the matrix)
+    } while(input != 32);
+    if(mainMenu.exitButton.isSelected) {
+        clear();
+        doQuit = true;
     }
     else if(mainMenu.startButton.isSelected) {
         clear();
     }
 }
 
+void game::startTeamScreen() {
+    teamScreen teamScreen(terminalWidth, terminalHeight);
+    int input;
+    do {
+        teamScreen.draw();
+        refresh();
+        input = getch();
+        teamScreen.handleInput(input);
+    } while(input != 32);
+    if(teamScreen.teamAButton.isSelected) {
+        clear();
+        oManager.addLocalPlayer(1);
+    }
+    else if(teamScreen.teamBButton.isSelected) {
+        clear();
+        oManager.addLocalPlayer(2);
+    }
+}
+
 void game::connect() {
     // networking
     // blah blah blah
-}
-
-void game::startTeamScreen() {
-    // team screen
-    // bleh blah
+    gClient.connect(port);
 }
 
 void game::gameLoop() {
     gClock.startClock();
-    oManager.addPlayer(35, 35);
-    oManager.initPlayers();
-    gameField gField(400, 80);
     nodelay(stdscr, TRUE);     // Enable non-blocking mode for getch
     int input;
     int i = 1;
@@ -66,12 +81,15 @@ void game::gameLoop() {
         if(gClock.shouldUpdate()) {
             input = getch();
             flushinp(); // function to flush input buffer (very important)
+            gClient.update(oManager);
             if (input != ERR) {
-                oManager.inputPlayers(input);
+                oManager.inputLocalPlayers(input);
             }
             oManager.updatePlayers();
+            gClient.sendPlayerUpdate(oManager.packLocalUpdate());
             clear();
             oManager.drawPlayers();
+            // debug
             mvprintw(1, 1, "tick count: %d", i);
             mvprintw(3, 1, "input: %d", input);
             refresh();

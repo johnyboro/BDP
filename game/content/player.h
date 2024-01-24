@@ -25,6 +25,7 @@ public:
     void setY(int y);
     void setVelocityX(int velocityX);
     void setVelocityY(int velocityY);
+    void setId(int id);
 
     void handleInput(int input);
     void update();
